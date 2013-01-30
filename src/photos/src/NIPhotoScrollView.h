@@ -55,6 +55,7 @@
 
 @property (nonatomic, readwrite, assign, getter=isZoomingEnabled) BOOL zoomingIsEnabled; // default: yes
 @property (nonatomic, readwrite, assign, getter=isZoomingAboveOriginalSizeEnabled) BOOL zoomingAboveOriginalSizeIsEnabled; // default: yes
+@property (nonatomic, readwrite, assign, getter=isFullScreenInitialZoom) BOOL fullScreenInitialZoom; // default: no
 @property (nonatomic, readwrite, assign, getter=isDoubleTapToZoomEnabled) BOOL doubleTapToZoomIsEnabled; // default: yes
 @property (nonatomic, readwrite, assign) CGFloat maximumScale; // default: 0 (autocalculate)
 @property (nonatomic, readwrite, NI_WEAK) id<NIPhotoScrollViewDelegate> photoScrollViewDelegate;

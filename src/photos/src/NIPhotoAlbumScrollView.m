@@ -33,6 +33,7 @@
 @synthesize photoViewBackgroundColor = _photoViewBackgroundColor;
 @synthesize zoomingIsEnabled = _zoomingIsEnabled;
 @synthesize zoomingAboveOriginalSizeIsEnabled = _zoomingAboveOriginalSizeIsEnabled;
+@synthesize fullScreenInitialZoom = _fullScreenInitialZoom;
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -41,6 +42,7 @@
     // Default state.
     self.zoomingIsEnabled = YES;
     self.zoomingAboveOriginalSizeIsEnabled = YES;
+    self.fullScreenInitialZoom = NO;
   }
   return self;
 }
@@ -165,6 +167,7 @@
   NIPhotoScrollView* photoScrollView = (NIPhotoScrollView *)pageView;
   photoScrollView.photoScrollViewDelegate = self;
   photoScrollView.zoomingAboveOriginalSizeIsEnabled = [self isZoomingAboveOriginalSizeEnabled];
+  photoScrollView.fullScreenInitialZoom = [self isFullScreenInitialZoom];
 
   return pageView;
 }

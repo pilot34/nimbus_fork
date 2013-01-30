@@ -58,6 +58,7 @@
 
 @property (nonatomic, readwrite, assign, getter=isZoomingEnabled) BOOL zoomingIsEnabled;
 @property (nonatomic, readwrite, assign, getter=isZoomingAboveOriginalSizeEnabled) BOOL zoomingAboveOriginalSizeIsEnabled;
+@property (nonatomic, readwrite, assign, getter=isFullScreenInitialZoom) BOOL fullScreenInitialZoom;
 @property (nonatomic, readwrite, NI_STRONG) UIColor* photoViewBackgroundColor;
 
 #pragma mark Configuring Presentation

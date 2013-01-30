@@ -98,6 +98,7 @@
 @synthesize photoDimensions = _photoDimensions;
 @synthesize zoomingIsEnabled = _zoomingIsEnabled;
 @synthesize zoomingAboveOriginalSizeIsEnabled = _zoomingAboveOriginalSizeIsEnabled;
+@synthesize fullScreenInitialZoom = _fullScreenInitialZoom;
 @synthesize photoScrollViewDelegate = _photoScrollViewDelegate;
 @synthesize doubleTapToZoomIsEnabled = _doubleTapToZoomIsEnabled;
 @synthesize maximumScale = _maximumScale;
@@ -112,6 +113,7 @@
     self.zoomingIsEnabled = YES;
     self.zoomingAboveOriginalSizeIsEnabled = YES;
     self.doubleTapToZoomIsEnabled = YES;
+    self.fullScreenInitialZoom = NO;
 
     // Autorelease so that we don't have to worry about releasing the subviews in dealloc.
     _scrollView = [[NICenteringScrollView alloc] initWithFrame:self.bounds];
@@ -413,7 +415,7 @@
                       ? 1
                       : (1.0f / NIScreenScale()));
 
-  if (NIPhotoScrollViewPhotoSizeThumbnail != photoSize) {
+  if (!self.fullScreenInitialZoom && NIPhotoScrollViewPhotoSizeThumbnail != photoSize) {
     // Don't let minScale exceed maxScale. (If the image is smaller than the screen, we
     // don't want to force it to be zoomed.)
     minScale = MIN(minScale, maxScale);
