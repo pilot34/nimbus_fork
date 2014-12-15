@@ -454,8 +454,9 @@ static const CGFloat kDatePickerTextFieldRightMargin = 5;
     //                                    withObject: _switchControl];
     
     // The following is a workaround to supress the warning and requires <objc/message.h>
-    objc_msgSend(switchElement.didChangeTarget, 
-                 switchElement.didChangeSelector, _switchControl);
+    ((void(*)(id, SEL, id))objc_msgSend)(switchElement.didChangeTarget,
+                                         switchElement.didChangeSelector,
+                                         _switchControl);
   }
 }
 
@@ -544,8 +545,9 @@ static const CGFloat kDatePickerTextFieldRightMargin = 5;
     //                                    withObject:_sliderControl];
 
     // The following is a workaround to supress the warning and requires <objc/message.h>
-    objc_msgSend(sliderElement.didChangeTarget, 
-                 sliderElement.didChangeSelector, _sliderControl);
+    ((void(*)(id, SEL, id))objc_msgSend)(sliderElement.didChangeTarget,
+                                       sliderElement.didChangeSelector,
+                                       _sliderControl);
   }
 }
 
@@ -644,8 +646,9 @@ static const CGFloat kDatePickerTextFieldRightMargin = 5;
     //                                               withObject:_segmentedControl];
 
     // The following is a workaround to supress the warning and requires <objc/message.h>
-    objc_msgSend(segmentedControlElement.didChangeTarget, 
-                 segmentedControlElement.didChangeSelector, _segmentedControl);
+    ((void(*)(id, SEL, id))objc_msgSend)(segmentedControlElement.didChangeTarget,
+                                       segmentedControlElement.didChangeSelector,
+                                       _segmentedControl);
   }
 }
 
@@ -843,8 +846,9 @@ static const CGFloat kDatePickerTextFieldRightMargin = 5;
     // [datePickerElement.didChangeTarget performSelector:datePickerElement.didChangeSelector withObject:self.datePicker];
 
     // The following is a workaround to supress the warning and requires <objc/message.h>
-    objc_msgSend(datePickerElement.didChangeTarget, 
-                 datePickerElement.didChangeSelector, _datePicker);
+    ((void(*)(id, SEL, id))objc_msgSend)(datePickerElement.didChangeTarget,
+                                       datePickerElement.didChangeSelector,
+                                       _datePicker);
 
   }
 }

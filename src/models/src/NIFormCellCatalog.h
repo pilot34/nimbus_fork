@@ -83,7 +83,7 @@
 
 @property (nonatomic, copy) NSString* labelText;
 @property (nonatomic, assign) BOOL value;
-@property (nonatomic, assign) id didChangeTarget;
+@property (nonatomic, weak) id didChangeTarget;
 @property (nonatomic, assign) SEL didChangeSelector;
 
 @end
