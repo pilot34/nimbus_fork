@@ -223,9 +223,9 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)nimbusOperationDidFinish:(NIOperation<NINetworkImageOperation> *)operation {
   [self _didFinishLoadingWithImage:operation.imageCroppedAndSizedForDisplay
-                   cacheIdentifier:operation.cacheIdentifier
+                   cacheIdentifier:operation.niCacheIdentifier
                        displaySize:operation.imageDisplaySize
-                       contentMode:operation.imageContentMode
+                       contentMode:operation.niImageContentMode
                       scaleOptions:operation.scaleOptions
                     expirationDate:nil];
 }
@@ -434,7 +434,7 @@
 
     // Attempt to load the image from memory first.
     if (nil != self.imageMemoryCache) {
-      NSString* cacheKey = [self cacheKeyForCacheIdentifier:operation.cacheIdentifier
+      NSString* cacheKey = [self cacheKeyForCacheIdentifier:operation.niCacheIdentifier
                                                   imageSize:displaySize
                                                 contentMode:contentMode
                                                scaleOptions:self.scaleOptions];
@@ -455,12 +455,12 @@
       // Unable to load the image from memory, so let's fire off the operation now.
       operation.delegate = self;
 
-      operation.imageCropRect = cropRect;
+      operation.niImageCropRect = cropRect;
       operation.scaleOptions = self.scaleOptions;
       operation.interpolationQuality = self.interpolationQuality;
       if (self.sizeForDisplay) {
         operation.imageDisplaySize = displaySize;
-        operation.imageContentMode = contentMode;
+        operation.niImageContentMode = contentMode;
       }
 
       self.operation = operation;
