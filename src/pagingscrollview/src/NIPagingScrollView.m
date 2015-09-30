@@ -280,8 +280,8 @@ const CGFloat NIPagingScrollViewDefaultPageMargin = 10;
 
   NSInteger currentVisiblePageIndex = [self currentVisiblePageIndex];
 
-  int firstVisiblePageIndex = boundi(currentVisiblePageIndex - 1, 0, self.numberOfPages - 1);
-  int lastVisiblePageIndex  = boundi(currentVisiblePageIndex + 1, 0, self.numberOfPages - 1);
+  int firstVisiblePageIndex = boundi(currentVisiblePageIndex - 2, 0, self.numberOfPages - 1);
+  int lastVisiblePageIndex  = boundi(currentVisiblePageIndex + 2, 0, self.numberOfPages - 1);
 
   return NSMakeRange(firstVisiblePageIndex, lastVisiblePageIndex - firstVisiblePageIndex + 1);
 }
@@ -351,7 +351,11 @@ const CGFloat NIPagingScrollViewDefaultPageMargin = 10;
   // This will only be called once before the page is shown.
   [self willDisplayPage:page atIndex:pageIndex];
 
-  [self.pagingScrollView addSubview:(UIView *)page];
+  if (!((UIView *)page).superview)
+      [self.pagingScrollView addSubview:(UIView *)page];
+    
+  ((UIView *)page).hidden = NO;
+    
   [_visiblePages addObject:page];
 }
 
@@ -361,7 +365,8 @@ const CGFloat NIPagingScrollViewDefaultPageMargin = 10;
   for (UIView<NIPagingScrollViewPage>* page in [_visiblePages copy]) {
     if (page.pageIndex == pageIndex) {
       [_viewRecycler recycleView:page];
-      [page removeFromSuperview];
+//      [page removeFromSuperview];
+      ((UIView *)page).hidden = YES;
 
       [self didRecyclePage:page];
 
@@ -386,7 +391,8 @@ const CGFloat NIPagingScrollViewDefaultPageMargin = 10;
   for (UIView<NIPagingScrollViewPage>* page in [_visiblePages copy]) {
     if (!NSLocationInRange(page.pageIndex, visiblePageRange)) {
       [_viewRecycler recycleView:page];
-      [page removeFromSuperview];
+        page.hidden = YES;
+//      [page removeFromSuperview];
 
       [self didRecyclePage:page];
 
@@ -622,7 +628,8 @@ const CGFloat NIPagingScrollViewDefaultPageMargin = 10;
   // Remove any visible pages from the view before we release the sets.
   for (UIView<NIPagingScrollViewPage>* page in _visiblePages) {
     [_viewRecycler recycleView:page];
-    [(UIView *)page removeFromSuperview];
+    page.hidden = YES;
+//    [(UIView *)page removeFromSuperview];
   }
 
   _visiblePages = nil;
